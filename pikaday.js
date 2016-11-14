@@ -180,6 +180,8 @@
         // bind the picker to a form field
         field: null,
 
+		disableButtons: true,
+
 		highlightDates: {},
 		callee: null,
         // automatically show/hide the picker on `field` focus (default `true` if `field` is set)
@@ -199,7 +201,7 @@
         defaultDate: null,
 
         // make the `defaultDate` the initial selected value
-        setDefaultDate: false,
+        setDefaultDate: true,
 
         // first day of week (0: Sunday, 1: Monday etc)
         firstDay: 0,
@@ -384,10 +386,10 @@
             next = false;
         }
 
-        if (c === 0) {
+        if (c === 0 && !opts.disableButtons) {
             html += '<button class="pika-prev' + (prev ? '' : ' is-disabled') + '" type="button">' + opts.i18n.previousMonth + '</button>';
         }
-        if (c === (instance._o.numberOfMonths - 1) ) {
+        if (c === (instance._o.numberOfMonths - 1) && !opts.disableButtons ) {
             html += '<button class="pika-next' + (next ? '' : ' is-disabled') + '" type="button">' + opts.i18n.nextMonth + '</button>';
         }
 
@@ -604,6 +606,7 @@
          */
         config: function(options)
         {
+
             if (!this._o) {
                 this._o = extend({}, defaults, true);
             }
@@ -625,8 +628,8 @@
 
             opts.disableDayFn = (typeof opts.disableDayFn) === 'function' ? opts.disableDayFn : null;
 
-            var nom = parseInt(opts.numberOfMonths, 10) || 1;
-            opts.numberOfMonths = nom > 4 ? 4 : nom;
+            //var nom = parseInt(opts.numberOfMonths, 10) || 1;
+            //opts.numberOfMonths = nom > 4 ? 4 : nom;
 
             if (!isDate(opts.minDate)) {
                 opts.minDate = false;
