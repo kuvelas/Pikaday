@@ -519,30 +519,31 @@
             self._c = false;
         };
 
-        self._onClick = function(e)
-        {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                pEl = target;
-            if (!target) {
-                return;
-            }
-            if (!hasEventListeners && hasClass(target, 'pika-select')) {
-                if (!target.onchange) {
-                    target.setAttribute('onchange', 'return;');
-                    addEvent(target, 'change', self._onChange);
-                }
-            }
-            do {
-                if (hasClass(pEl, 'pika-single') || pEl === opts.trigger) {
-                    return;
-                }
-            }
-            while ((pEl = pEl.parentNode));
-            if (self._v && target !== opts.trigger && pEl !== opts.trigger) {
-                self.hide();
-            }
-        };
+			self._onClick = function(e)
+			{
+				e = e || window.event;
+				var target = e.target || e.srcElement,
+					pEl = target;
+				if (!target) {
+					return;
+
+				}
+				if (!hasEventListeners && hasClass(target, 'pika-select')) {
+					if (!target.onchange) {
+						target.setAttribute('onchange', 'return;');
+						addEvent(target, 'change', self._onChange);
+					}
+				}
+				do {
+					if (hasClass(pEl, 'pika-single') || pEl === opts.trigger) {
+						return;
+					}
+				}
+				while ((pEl = pEl.parentNode));
+				if (self._v && target !== opts.trigger && pEl !== opts.trigger) {
+					self.hide();
+				}
+			};
 
         self.el = document.createElement('div');
         self.el.className = 'pika-single' + (opts.isRTL ? ' is-rtl' : '') + (opts.theme ? ' ' + opts.theme : '');
